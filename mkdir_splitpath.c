@@ -114,7 +114,7 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
     }
     int idx=0;
     length=0;
-    char* str[256]={0};
+    char str[256]={0};
     while(1){
         if(dirName[idx+length]=='/'||dirName[idx+length]==0){
             
