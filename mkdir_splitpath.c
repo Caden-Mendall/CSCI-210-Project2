@@ -61,6 +61,8 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
         pathName[1]=0;
     }
     baseName[0]=dirName[0]=0;
+
+    printf("%s\n",pathName);
     
     char string[64];
     int dirEnd=0;
