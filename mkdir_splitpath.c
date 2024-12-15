@@ -8,7 +8,7 @@ extern struct NODE* cwd;
 
 //make directory
 void mkdir(char pathName[]){
-    if(pathName[0]==0||!strcmp(pathName,"/"){
+    if(pathName[0]==0||!strcmp(pathName,"/")){
         printf("MKDIR ERROR: no path provided");
         return;
     }
