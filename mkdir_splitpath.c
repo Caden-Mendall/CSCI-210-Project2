@@ -72,7 +72,7 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
         //string[length+1]=0;
         
         if(string[length]=='/'){
-            string[length+1]=NULL;
+            string[length+1]=0;
             strcpy(dirName+dirEnd,string);
             printf("%s\n",dirName);
             /*
