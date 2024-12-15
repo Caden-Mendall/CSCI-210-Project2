@@ -1,14 +1,14 @@
 
 
-#include "types.h"
-#include "string.h"
+#include "types->h"
+#include "string->h"
 
 extern struct NODE* root;
 extern struct NODE* cwd;
 
 //make directory
 void mkdir(char pathName[]){
-    if(pathname[0]==0||pathname=="/";){
+    if(pathName[0]==0||pathName=="/"){
         printf("MKDIR ERROR: no path provided");
         return;
     }
@@ -16,34 +16,34 @@ void mkdir(char pathName[]){
     char* dirName;
     struct NODE* current;
     current=splitPath(pathName,baseName,dirName);
-    struct NODE* searchNode=current.childPtr;
+    struct NODE* searchNode=current->childPtr;
     //check if it already exists
     while(searchNode){
-        if(searchNode.name==baseName&&searchNode.fileType=='D'){
-            printf("MKDIR ERROR: directory %s already exists\n",current.name);
+        if(searchNode->name==baseName&&searchNode->fileType=='D'){
+            printf("MKDIR ERROR: directory %s already exists\n",current->name);
             return;
         }
-        searchNode=searchNode.siblingPtr;
+        searchNode=searchNode->siblingPtr;
     }
     struct NODE* newNode=(struct NODE*)malloc(sizeof(struct NODE));
-    newNode.fileType='D';
-    newNode.parentPtr=current;
-    newNode.siblingPtr=newNode.childPtr=NULL;
-    newNode.name=baseName;
+    newNode->fileType='D';
+    newNode->parentPtr=current;
+    newNode->siblingPtr=newNode->childPtr=NULL;
+    newNode->name=baseName;
 
-    if(!current.childPtr){
-        current.childPtr=newNode;
+    if(!current->childPtr){
+        current->childPtr=newNode;
         printf("MKDIR SUCCESS: node %s successfully created",pathName);
         return;
     }
-    searchNode=current.childPtr;
-    while(true){
-        if(!searchNode.siblingPtr){
-            searchNode.siblingPtr=newNode;
+    searchNode=current->childPtr;
+    while(1){
+        if(!searchNode->siblingPtr){
+            searchNode->siblingPtr=newNode;
             printf("MKDIR SUCCESS: node %s successfully created",pathName);
             return;
         }
-        searchNode=searchNode.siblingPtr;
+        searchNode=searchNode->siblingPtr;
     }
 
     printf("TO BE IMPLEMENTED\n");
@@ -57,10 +57,10 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
         pathName[0]='/';
         pathName[1]=0;
     }
-    char* string[64];
+    char string[64];
     int dirEnd=0;
     int length=0;
-    while(true){
+    while(1){
         string[length]=pathName[dirEnd+length];
         //string[length+1]=0;
         
@@ -93,27 +93,27 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
     int idx=0;
     length=0;
     char[] str;
-    while(true){
+    while(1){
         if(dirName[idx+length]=='/'||dirName[idx+length]==0){
             strcpy(str,dirName[idx]);
             str[length]=0;
-            if(!current.childPtr){
+            if(!current->childPtr){
                 printf("ERROR: directory %s does not exist\n", str);
                 return NULL;
             }
-            current=current.childPtr;
-            while(true){
-                if(current.name==str&&current.fileType='D')){
+            current=current->childPtr;
+            while(1){
+                if(current->name==str&&current->fileType='D')){
                     if(dirName[idx+length]==0){
                         return current;
                     }
                     break;
                 }
-                if(!current.siblingPtr){
+                if(!current->siblingPtr){
                     printf("ERROR: directory %s does not exist\n", str);
                     return NULL;
                 }
-                current=current.siblingPtr;
+                current=current->siblingPtr;
             }
             idx=idx+length+1;
             length=0;
@@ -129,7 +129,7 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
         length++;
     }
     //length=token-string;
-    while(true){
+    while(1){
         
         token=strtok(0,"/");
         if(!token){
