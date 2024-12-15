@@ -106,15 +106,14 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
     //correct up to here
     printf("%s, %s\n",baseName,dirName);
 
+    int idx=0;
     struct NODE* current;
     if(pathName[0]=='/'){
         current=root;
-        length=0;
     }else{
         current=cwd;
-        length=1;
+        idx=1;
     }
-    int idx=0;
     length=0;
     char str[256]={0};
     if(dirName[0]==0){
