@@ -96,13 +96,14 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
         }
     }
     
-    printf("%s, %s\n",baseName,dirName);
     
     if(dirEnd>0){
         dirName[dirEnd-1]=0;
     }else{
         dirName="";
     }
+    
+    printf("%s, %s\n",baseName,dirName);
 
 
     struct NODE* current;
