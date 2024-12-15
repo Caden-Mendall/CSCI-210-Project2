@@ -16,7 +16,9 @@ void mkdir(char pathName[]){
     char dirName[256]={0};
     struct NODE* current;
     current=splitPath(pathName,baseName,dirName);
-    
+    if(current==NULL){
+        return;
+    }
     printf("1\n");
     
     struct NODE* searchNode=current->childPtr;
