@@ -14,8 +14,7 @@ void mkdir(char pathName[]){
     }
     char baseName[64]={0};
     char dirName[256]={0};
-    struct NODE* current;
-    current=splitPath(pathName,baseName,dirName);
+    struct NODE* current=splitPath(pathName,baseName,dirName);
     if(current==NULL){
         return;
     }
@@ -26,7 +25,7 @@ void mkdir(char pathName[]){
     //check if it already exists
     while(searchNode){
         if(!strcmp(searchNode->name,baseName)&&searchNode->fileType=='D'){
-            printf("MKDIR ERROR: directory %s already exists\n",current->name);
+            printf("MKDIR ERROR: directory %s already exists\n",searchNode->name);
             return;
         }
         searchNode=searchNode->siblingPtr;
