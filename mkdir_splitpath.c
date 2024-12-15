@@ -12,8 +12,8 @@ void mkdir(char pathName[]){
         printf("MKDIR ERROR: no path provided");
         return;
     }
-    char* baseName;
-    char* dirName;
+    char* baseName=0;
+    char* dirName=0;
     struct NODE* current;
     current=splitPath(pathName,baseName,dirName);
     struct NODE* searchNode=current->childPtr;
@@ -97,7 +97,7 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
     }
     int idx=0;
     length=0;
-    char* str;
+    char* str=0;
     while(1){
         if(dirName[idx+length]=='/'||dirName[idx+length]==0){
             strcpy(str,dirName+idx);
