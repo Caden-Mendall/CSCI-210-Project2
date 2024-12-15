@@ -74,7 +74,7 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
         if(string[length]=='/'){
             string[length+1]=0;
             strcpy(dirName+dirEnd,string);
-            printf("%s\n",dirName);
+            //printf("%s\n",dirName);
             /*
             for(int i=0;i<length;i++){
                 dirName[dirEnd+i]=string[i];
@@ -103,8 +103,8 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
         dirName="";
     }
     
+    //correct up to here
     printf("%s, %s\n",baseName,dirName);
-
 
     struct NODE* current;
     if(pathName[0]=='/'){
@@ -117,6 +117,9 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
     char* str=NULL;
     while(1){
         if(dirName[idx+length]=='/'||dirName[idx+length]==0){
+            
+            printf("%s\n",dirName+idx);
+            
             strcpy(str,dirName+idx);
             str[length]=0;
             if(!current->childPtr){
