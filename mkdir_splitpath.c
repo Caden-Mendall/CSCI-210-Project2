@@ -115,6 +115,9 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
     int idx=0;
     length=0;
     char str[256]={0};
+    if(dirName[0]==0){
+        reutrn current;
+    }
     while(1){
         if(dirName[idx+length]=='/'||dirName[idx+length]==0){
             
@@ -125,13 +128,22 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
             printf("2: %s\n",str);
             
             str[length]=0;
+
+            /*
+            if(!strcmp(current->name,str)&&current->fileType=='D'){
+                if(dirName[idx+length]==0){
+                    return current;
+                }
+                break;
+            }*/
+            
             if(!current->childPtr){
                 printf("ERROR: directory %s does not exist\n", str);
                 return NULL;
             }
             current=current->childPtr;
             while(1){
-                if(current->name==str&&current->fileType=='D'){
+                if(!strcmp(current->name,str)&&current->fileType=='D'){
                     if(dirName[idx+length]==0){
                         return current;
                     }
