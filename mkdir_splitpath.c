@@ -29,7 +29,7 @@ void mkdir(char pathName[]){
     newNode->fileType='D';
     newNode->parentPtr=current;
     newNode->siblingPtr=newNode->childPtr=NULL;
-    newNode->name=baseName;
+    strcpy(newNode->name,baseName);
 
     if(!current->childPtr){
         current->childPtr=newNode;
@@ -66,7 +66,7 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
         
         if(string[length]=='/'){
             string[length+1]=0;
-            strcpy(dirname[dirEnd],string);
+            strcpy(dirName+dirEnd,string);
             /*
             for(int i=0;i<length;i++){
                 dirName[dirEnd+i]=string[i];
@@ -76,7 +76,7 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
             //string[0]=0;
         }else if(!string[length]){
             //string[length+1]=0;
-            strcpy(basename,string);
+            strcpy(baseName,string);
             /*
             for(int i=0;i<length;i++){
                 baseName[i]=string[i];
@@ -92,10 +92,10 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
     struct NODE* current=root;
     int idx=0;
     length=0;
-    char[] str;
+    char* str;
     while(1){
         if(dirName[idx+length]=='/'||dirName[idx+length]==0){
-            strcpy(str,dirName[idx]);
+            strcpy(str,dirName+idx);
             str[length]=0;
             if(!current->childPtr){
                 printf("ERROR: directory %s does not exist\n", str);
