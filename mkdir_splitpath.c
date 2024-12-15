@@ -16,7 +16,9 @@ void mkdir(char pathName[]){
     char dirName[256]={0};
     struct NODE* current;
     current=splitPath(pathName,baseName,dirName);
+    
     printf("1\n");
+    
     struct NODE* searchNode=current->childPtr;
     //check if it already exists
     while(searchNode){
@@ -89,7 +91,9 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
         }
         length++;
     }
-    printf("2\n");
+    
+    printf("%s, %s\n",baseName,dirName);
+    
     if(dirEnd>0){
         dirName[dirEnd-1]=0;
     }else{
@@ -131,7 +135,9 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
             idx=idx+length+1;
             length=0;
         }
+        
         printf("3\n");
+        
         length++;
     }
 
