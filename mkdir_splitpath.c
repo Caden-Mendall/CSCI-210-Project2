@@ -10,7 +10,7 @@ extern struct NODE* cwd;
 void mkdir(char pathName[]){
     //check if the path is empty
     if(pathName[0]==0||!strcmp(pathName,"/")){
-        printf("MKDIR ERROR: no path provided");
+        printf("MKDIR ERROR: no path provided\n");
         return;
     }
     char baseName[64]={0};
