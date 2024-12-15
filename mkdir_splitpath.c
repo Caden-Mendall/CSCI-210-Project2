@@ -1,7 +1,7 @@
 
 
-#include "types->h"
-#include "string->h"
+#include "types.h"
+#include "stringh"
 
 extern struct NODE* root;
 extern struct NODE* cwd;
