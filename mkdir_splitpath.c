@@ -8,18 +8,19 @@ extern struct NODE* cwd;
 
 //make directory
 void mkdir(char pathName[]){
+    //check if the path is empty
     if(pathName[0]==0||!strcmp(pathName,"/")){
         printf("MKDIR ERROR: no path provided");
         return;
     }
     char baseName[64]={0};
     char dirName[256]={0};
+    //call split path
     struct NODE* current=splitPath(pathName,baseName,dirName);
+    //split path doesn't return, exit
     if(current==NULL){
         return;
     }
-    
-    //printf("1\n");
     
     struct NODE* searchNode=current->childPtr;
     //check if it already exists
@@ -30,12 +31,14 @@ void mkdir(char pathName[]){
         }
         searchNode=searchNode->siblingPtr;
     }
+    //make the new node
     struct NODE* newNode=(struct NODE*)malloc(sizeof(struct NODE));
     newNode->fileType='D';
     newNode->parentPtr=current;
     newNode->siblingPtr=newNode->childPtr=NULL;
     strcpy(newNode->name,baseName);
 
+    //add the node into the structure
     if(!current->childPtr){
         current->childPtr=newNode;
         printf("MKDIR SUCCESS: node %s successfully created\n",pathName);
@@ -50,64 +53,44 @@ void mkdir(char pathName[]){
         }
         searchNode=searchNode->siblingPtr;
     }
-
-    printf("TO BE IMPLEMENTED\n");
-
+    //in theory, it should never reach this point
     return;
 }
 
 //handles tokenizing and absolute/relative pathing options
 struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
+    //check for no path name
     if(!pathName[0]){
         pathName[0]='/';
         pathName[1]=0;
     }
     baseName[0]=dirName[0]=0;
-
-    //printf("%s\n",pathName);
     
     char string[64]={0};
     int dirEnd=0;
     int length=0;
+    //split the path into base and dir
     while(1){
         string[length]=pathName[dirEnd+length];
-        //string[length+1]=0;
-        
         if(string[length]=='/'){
             string[length+1]=0;
             strcpy(dirName+dirEnd,string);
-            //printf("%s\n",dirName);
-            /*
-            for(int i=0;i<length;i++){
-                dirName[dirEnd+i]=string[i];
-            }*/
             dirEnd+=(length+1);
             length=0;
-            //string[0]=0;
         }else if(!string[length]){
-            //string[length+1]=0;
             strcpy(baseName,string);
-            /*
-            for(int i=0;i<length;i++){
-                baseName[i]=string[i];
-            }
-            */
             break;
         }else{
             length++;
         }
     }
-    
-    
+    //make sure dirName ends in a terminator
     if(dirEnd>0){
         dirName[dirEnd-1]=0;
     }else{
         dirName="";
     }
     
-    //correct up to here
-    //printf("%s, %s\n",baseName,dirName);
-
     int idx=0;
     struct NODE* current;
     if(pathName[0]=='/'){
@@ -121,25 +104,12 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
     if(dirName[0]==0){
         return current;
     }
+    //go through the file system to find the node
     while(1){
         if(dirName[idx+length]=='/'||dirName[idx+length]==0){
-            
-            //printf("1: %s\n",dirName+idx);
-            
             strcpy(str,dirName+idx);
-
-            //printf("2: %s\n",str);
-            
             str[length]=0;
-
-            /*
-            if(!strcmp(current->name,str)&&current->fileType=='D'){
-                if(dirName[idx+length]==0){
-                    return current;
-                }
-                break;
-            }*/
-            
+            //once a delimiter or terminator is found, traverse through the children to find it
             if(!current->childPtr){
                 printf("ERROR: directory %s does not exist\n", str);
                 return NULL;
@@ -161,29 +131,7 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
             idx=idx+length+1;
             length=0;
         }
-        
-        //printf("3\n");
-        
         length++;
     }
-
-    /*
-    string=dirName;
-    char[64] token=strtok(string,"/");
-    length=0;
-    while(string+length!=token){
-        length++;
-    }
-    //length=token-string;
-    while(1){
-        
-        token=strtok(0,"/");
-        if(!token){
-            break;
-        }
-        string=token+1;
-    }
-    */
-    
     return NULL;
 }
