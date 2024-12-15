@@ -121,6 +121,9 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
             printf("%s\n",dirName+idx);
             
             strcpy(str,dirName+idx);
+
+            printf("%s\n",str);
+            
             str[length]=0;
             if(!current->childPtr){
                 printf("ERROR: directory %s does not exist\n", str);
