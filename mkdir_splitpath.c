@@ -8,7 +8,7 @@ extern struct NODE* cwd;
 
 //make directory
 void mkdir(char pathName[]){
-    if(pathName[0]==0||pathName=="/"){
+    if(pathName[0]==0||!strcmp(pathName,"/"){
         printf("MKDIR ERROR: no path provided");
         return;
     }
@@ -89,7 +89,12 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
     dirName[dirEnd-1]=0;
 
 
-    struct NODE* current=root;
+    struct NODE* current;
+    if(pathName[0]=='/'){
+        current=root;
+    }else{
+        current=cwd;
+    }
     int idx=0;
     length=0;
     char* str;
@@ -103,7 +108,7 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
             }
             current=current->childPtr;
             while(1){
-                if(current->name==str&&current->fileType='D')){
+                if(current->name==str&&current->fileType=='D'){
                     if(dirName[idx+length]==0){
                         return current;
                     }
