@@ -38,14 +38,14 @@ void mkdir(char pathName[]){
 
     if(!current->childPtr){
         current->childPtr=newNode;
-        printf("MKDIR SUCCESS: node %s successfully created",pathName);
+        printf("MKDIR SUCCESS: node %s successfully created\n",pathName);
         return;
     }
     searchNode=current->childPtr;
     while(1){
         if(!searchNode->siblingPtr){
             searchNode->siblingPtr=newNode;
-            printf("MKDIR SUCCESS: node %s successfully created",pathName);
+            printf("MKDIR SUCCESS: node %s successfully created\n",pathName);
             return;
         }
         searchNode=searchNode->siblingPtr;
