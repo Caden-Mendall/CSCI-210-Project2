@@ -110,9 +110,9 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
     struct NODE* current;
     if(pathName[0]=='/'){
         current=root;
+        idx=1;
     }else{
         current=cwd;
-        idx=1;
     }
     length=0;
     char str[256]={0};
