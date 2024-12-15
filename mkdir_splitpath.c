@@ -118,11 +118,11 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
     while(1){
         if(dirName[idx+length]=='/'||dirName[idx+length]==0){
             
-            printf("%s\n",dirName+idx);
+            printf("1: %s\n",dirName+idx);
             
             strcpy(str,dirName+idx);
 
-            printf("%s\n",str);
+            printf("2: %s\n",str);
             
             str[length]=0;
             if(!current->childPtr){
